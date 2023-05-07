@@ -29,10 +29,11 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
     POSICION_PALABRA = 0
     MIN_LETRAS = 5
     CANTIDAD_DE_CANDIDATOS=0
+    MAXIMOS_CANDIDATOS_ADMITIDOS = 3
 
     indice = 0
 
-    while ( CANTIDAD_DE_CANDIDATOS<3 and indice < len (lista_de_listas) ):
+    while ( CANTIDAD_DE_CANDIDATOS< MAXIMOS_CANDIDATOS_ADMITIDOS  and indice < len (lista_de_listas) ):
 
         if( len( lista_de_listas[indice][ POSICION_PALABRA] ) >= MIN_LETRAS) :
 
