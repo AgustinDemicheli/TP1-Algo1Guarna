@@ -1535,6 +1535,3 @@ def obtener_lista_definiciones():
 
     random.shuffle(list)
     return list
-
-def hablar () :
-    print('holaa')
