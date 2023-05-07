@@ -41,9 +41,6 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
         indice+=1
         CANTIDAD_DE_CANDIDATOS+=1
 
-    print( "Esta es la lista por parametros", lista_de_listas[0:3] )
-    print( "Este es mi objeto de candidatos", palabras_candidatas)
-
     #---------------------------------------------------------------------------------------------
 
     lista = list( palabras_candidatas.keys() )
@@ -56,13 +53,13 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
     for i in range(len(lista)) :
 
         contador_De_letras = 0
-        #print( lista[i][0] )
+
 
         for j in range(len(lista)) :
 
             
             if ( lista[i][0] == lista[j][0] ) :
-                #print('hola')
+ 
                 contador_De_letras+=1
             
         palabras_por_letras[ lista[i][0] ] = contador_De_letras
@@ -71,7 +68,6 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
 
     for elem in palabras_por_letras :
 
-        #print('resulado', elem)
 
         if ( palabras_por_letras[elem] == 1 ) :
             print( 'Hay', palabras_por_letras[elem], 'palabra que empieza con la letra', elem )
