@@ -1,4 +1,5 @@
-import datos #PORQUE ESTA A LA MISMA ALTURA DE RAIZ
+import datos
+#PORQUE ESTA A LA MISMA ALTURA DE RAIZ
 
 
 
@@ -16,7 +17,7 @@ import datos #PORQUE ESTA A LA MISMA ALTURA DE RAIZ
 # palabras que hay por cada letra, y el total que hay en el diccionario.
 
 
-def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una lista_de_listasa de lista_de_listasas
+def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa de lista_de_listasas
 
     """
     El objetivo será generar un diccionario de palabras candidatas a adivinar.
@@ -25,15 +26,17 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
     palabras que hay por cada letra, y el total que hay en el diccionario.
     """
     palabras_candidatas = {}
+    
+    lista_de_listas = datos.obtener_lista_definiciones()
 
     POSICION_PALABRA = 0
     MIN_LETRAS = 5
     CANTIDAD_DE_CANDIDATOS=0
-    MAXIMOS_CANDIDATOS_ADMITIDOS = 3
+    MAXIMOS_CANDIDATOS_ADMITIDOS = 10
 
     indice = 0
 
-    while ( CANTIDAD_DE_CANDIDATOS< MAXIMOS_CANDIDATOS_ADMITIDOS  and indice < len (lista_de_listas) ):
+    while ( indice < len(lista_de_listas)):
 
         if( len( lista_de_listas[indice][ POSICION_PALABRA] ) >= MIN_LETRAS) :
 
@@ -65,20 +68,21 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
             
         palabras_por_letras[ lista[i][0] ] = contador_De_letras
 
-    print('Letras y cuantas veces estan: ', palabras_por_letras)
+    #print('Letras y cuantas veces estan: ', palabras_por_letras)
 
-    for elem in palabras_por_letras :
+    #for elem in palabras_por_letras :
 
 
-        if ( palabras_por_letras[elem] == 1 ) :
-            print( 'Hay', palabras_por_letras[elem], 'palabra que empieza con la letra', elem )
+        #if ( palabras_por_letras[elem] == 1 ) :
+            
+            #print( 'Hay', palabras_por_letras[elem], 'palabra que empieza con la letra', elem )
         
-        else: 
+        #else:
+            
 
-            print( 'Hay', palabras_por_letras[elem], 'palabras que empiezan con la letra', elem )
+            #print( 'Hay', palabras_por_letras[elem], 'palabras que empiezan con la letra', elem )
 
-    print( lista )
-
+    #print( lista )
 
 
 
@@ -86,5 +90,7 @@ def generar_palabras_candidatas ( lista_de_listas ) :  #lista_de_listas, es una 
     
 
     print('La cantidad total de palabras candidatas son:', len(palabras_candidatas))
+    
+    return palabras_candidatas
 
-generar_palabras_candidatas( datos.obtener_lista_definiciones() )
+generar_palabras_candidatas()
