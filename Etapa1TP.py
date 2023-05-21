@@ -1,20 +1,28 @@
 import letraPalabra
 import letraSignificado
 
-def tablero(palabras,palabras_significado):
+
+
+def tablero( ):
     """
     tablero recibe dos diccionarios, el primero  contiene inciales-palabra,
     el segundo contiene la inicial de la palabra con su significado
     """
+
+    
+
     jugar="si"
     puntos=0
     while jugar=="si":
+        (palabras, palabras_significado) = letraPalabra.letra_palabra()
+
         iniciales=[]
         palabra_completa=[]
         respuesta=[]
         valores=[]
         letras=[]
         significado=[]
+        
         for llaves,valor in palabras.items():
             iniciales.append(f"[{llaves}]")
             palabra_completa.append(valor)
@@ -73,4 +81,8 @@ def listado(historial_turno):
         lista+=intentos+"\n"
     return lista    
 
-print(tablero(letraPalabra.letra_palabra(),letraSignificado.letra_sifnificado()))
+#print(tablero(letraPalabra.letra_palabra() ,letraSignificado.letra_sifnificado()))
+
+
+
+print( tablero() )

@@ -1,4 +1,4 @@
-import datos
+from datos import datos
 #PORQUE ESTA A LA MISMA ALTURA DE RAIZ
 
 
@@ -47,6 +47,51 @@ def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa 
 
     #---------------------------------------------------------------------------------------------
 
+    # lista = list( palabras_candidatas.keys() )
+
+    # palabras_por_letras= {}
+
+    
+
+    
+    # for i in range(len(lista)) :
+
+    #     contador_De_letras = 0
+
+
+    #     for j in range(len(lista)) :
+
+            
+    #         if ( lista[i][0] == lista[j][0] ) :
+ 
+    #             contador_De_letras+=1
+            
+    #     palabras_por_letras[ lista[i][0] ] = contador_De_letras
+
+    # print('Letras y cuantas veces estan: ', palabras_por_letras)
+
+    # for elem in palabras_por_letras :
+
+
+    #     if ( palabras_por_letras[elem] == 1 ) :
+            
+    #         print( 'Hay', palabras_por_letras[elem], 'palabra que empieza con la letra', elem )
+        
+    #     else:
+            
+
+    #         print( 'Hay', palabras_por_letras[elem], 'palabras que empiezan con la letra', elem )
+
+    # #print( lista )    
+
+    # print('La cantidad total de palabras candidatas son:', len(palabras_candidatas))
+    
+    return palabras_candidatas
+
+
+
+def impresiones ( palabras_candidatas ) :
+
     lista = list( palabras_candidatas.keys() )
 
     palabras_por_letras= {}
@@ -68,29 +113,26 @@ def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa 
             
         palabras_por_letras[ lista[i][0] ] = contador_De_letras
 
-    #print('Letras y cuantas veces estan: ', palabras_por_letras)
+    print('Letras y cuantas veces estan: ', palabras_por_letras)
 
-    #for elem in palabras_por_letras :
+    for elem in palabras_por_letras :
 
 
-        #if ( palabras_por_letras[elem] == 1 ) :
+        if ( palabras_por_letras[elem] == 1 ) :
             
-            #print( 'Hay', palabras_por_letras[elem], 'palabra que empieza con la letra', elem )
+            print( 'Hay', palabras_por_letras[elem], 'palabra que empieza con la letra', elem )
         
-        #else:
+        else:
             
 
-            #print( 'Hay', palabras_por_letras[elem], 'palabras que empiezan con la letra', elem )
+            print( 'Hay', palabras_por_letras[elem], 'palabras que empiezan con la letra', elem )
 
-    #print( lista )
-
-
-
-
-    
+    #print( lista )    
 
     print('La cantidad total de palabras candidatas son:', len(palabras_candidatas))
-    
-    return palabras_candidatas
+
+#---------------------------------------------------------------------------------------------------
 
 generar_palabras_candidatas()
+
+impresiones( generar_palabras_candidatas() )
