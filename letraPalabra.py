@@ -2,6 +2,10 @@ import Etapa2
 import Etapa3
 
 def letra_palabra():
+    """
+    recibe las listas y organiza la información en un diccionario con la letra como llave y palabra como valor
+    -Nadeska Millán-
+    """
     PRIMERA_LETRA = 0
     lista_vieja = Etapa3.eleccion_palabras_candidatas( Etapa2.generar_palabras_candidatas(), Etapa3.eleccion_letras() )
     palabra={}

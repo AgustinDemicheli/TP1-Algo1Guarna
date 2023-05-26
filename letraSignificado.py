@@ -2,6 +2,10 @@ import Etapa2
 import Etapa3
 
 def letra_sifnificado():
+    """
+    recibe las listas y organiza la información en un diccionario con la palabra como clave y el significado como valor
+    -Nadeska Millán-
+    """
     #lista_vieja=datos_prueba.datos_prueba()
     lista_vieja = Etapa3.eleccion_palabras_candidatas( Etapa2.generar_palabras_candidatas(), Etapa3.eleccion_letras() )
 

@@ -1,12 +1,17 @@
 import letraPalabra
 import letraSignificado
 
+PTO_ACIERTO=10
+PTO_ERROR=-3
 
 
 def tablero( ):
     """
+    Dentro de un ciclo,
     tablero recibe dos diccionarios, el primero  contiene inciales-palabra,
-    el segundo contiene la inicial de la palabra con su significado
+    el segundo contiene la palabra con su significado, se desglosan en listas, se realiza un llamado a turnos y 
+    al final del tablero si no deseamos continuar jugando nos muestra la puntuacion sino se reinicia el ciclo
+    -Agustín Demicheli-
     """
 
     
@@ -19,7 +24,6 @@ def tablero( ):
         iniciales=[]
         palabra_completa=[]
         respuesta=[]
-        valores=[]
         letras=[]
         significado=[]
         
@@ -27,24 +31,28 @@ def tablero( ):
             iniciales.append(f"[{llaves}]")
             palabra_completa.append(valor)
             respuesta.append('[ ]')
-            valores.append(valor)
+
         for letters,meaning in palabras_significado.items():
             letras.append(f"[{letters}]")
             significado.append(meaning)
 
-        j=0 
-        aciertos=0
-        errores=0
-        PTO_ACIERTO=10
-        PTO_ERROR=-3
-        historial=[]
-        puntos=turno(iniciales,respuesta,j,aciertos,errores,PTO_ACIERTO,PTO_ERROR,puntos,palabra_completa,significado,valores,historial)
+        puntos=turno(iniciales,respuesta,puntos,palabra_completa,significado)
         juego=input('¿Desea continuar jugando? ')
         if juego.lower()=='no':
             jugar="no"
             return (f'su puntuacion final es: {puntos}')
 
-def turno(iniciales,respuesta,j,aciertos,errores,PTO_ACIERTO,PTO_ERROR,puntos,palabra_completa,significado,valores,historial):
+def turno(iniciales,respuesta,puntos,palabra_completa,significado):
+    """
+    Muestra el tablero como tal, es la funcion encargada de llevar la
+    informacion del tablero a cabo, recibe un llamado a listado y devuelve los puntos
+    -Agustín Demicheli-
+    -Nadeska Millán-
+    """
+    j=0 
+    aciertos=0
+    errores=0
+    historial=[]
     while j<len(iniciales):
         print("".join(iniciales))
         print("".join(respuesta))
@@ -56,9 +64,8 @@ def turno(iniciales,respuesta,j,aciertos,errores,PTO_ACIERTO,PTO_ERROR,puntos,pa
         pregunta=input('Ingrese una palabra: ')
         
         
-        if pregunta ==valores[j]:
+        if pregunta ==palabra_completa[j]:
                 respuesta[j]='[a]'
-                
                 aciertos+=1
                 puntos+=PTO_ACIERTO
                 historial.append(f"Turno letra {iniciales[j][1]}-palabra de {len(palabra_completa[j])} letras - acierto")
@@ -76,6 +83,11 @@ def turno(iniciales,respuesta,j,aciertos,errores,PTO_ACIERTO,PTO_ERROR,puntos,pa
     return puntos
 
 def listado(historial_turno):
+    """
+    almacena el historial de juego en cada tablero para mostrar al final en formato,
+    cadena una lista de errores y aciertos
+    -Agustín Demicheli-
+    """
     lista=""
     for intentos in historial_turno:
         lista+=intentos+"\n"
