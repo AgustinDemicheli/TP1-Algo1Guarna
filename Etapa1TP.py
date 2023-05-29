@@ -1,5 +1,4 @@
 import letraPalabra
-import letraSignificado
 
 PTO_ACIERTO=10
 PTO_ERROR=-3
@@ -37,10 +36,12 @@ def tablero( ):
             significado.append(meaning)
 
         puntos=turno(iniciales,respuesta,puntos,palabra_completa,significado)
-        juego=input('¿Desea continuar jugando? ')
+        juego=input('¿Desea continuar jugando? si/no ')
         if juego.lower()=='no':
             jugar="no"
-            return (f'su puntuacion final es: {puntos}')
+        elif juego.lower()!='si':
+            jugar=input('¿Desea continuar jugando? si/no ')
+    return (f'su puntuacion final es: {puntos}')
 
 def turno(iniciales,respuesta,puntos,palabra_completa,significado):
     """
@@ -84,7 +85,7 @@ def turno(iniciales,respuesta,puntos,palabra_completa,significado):
 
 def listado(historial_turno):
     """
-    almacena el historial de juego en cada tablero para mostrar al final en formato,
+    almacena el historial de juego en cada tablero para mostrar al final en formato
     cadena una lista de errores y aciertos
     -Agustín Demicheli-
     """
@@ -92,8 +93,6 @@ def listado(historial_turno):
     for intentos in historial_turno:
         lista+=intentos+"\n"
     return lista    
-
-#print(tablero(letraPalabra.letra_palabra() ,letraSignificado.letra_sifnificado()))
 
 
 

@@ -32,7 +32,6 @@ def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa 
     POSICION_PALABRA = 0
     MIN_LETRAS = 5
     CANTIDAD_DE_CANDIDATOS=0
-    MAXIMOS_CANDIDATOS_ADMITIDOS = 10
 
     indice = 0
 

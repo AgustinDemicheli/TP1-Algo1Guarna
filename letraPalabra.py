@@ -3,8 +3,11 @@ import Etapa3
 
 def letra_palabra():
     """
-    recibe las listas y organiza la información en un diccionario con la letra como llave y palabra como valor
+    recibe las listas y organiza la información en un diccionario con la letra como llave y palabra como valor,
+    también recibe las listas y organiza la información en un diccionario con la palabra como clave y el significado como valor
     -Nadeska Millán-
+  
+    
     """
     PRIMERA_LETRA = 0
     lista_vieja = Etapa3.eleccion_palabras_candidatas( Etapa2.generar_palabras_candidatas(), Etapa3.eleccion_letras() )
