@@ -1,23 +1,9 @@
 from datos import datos
-#PORQUE ESTA A LA MISMA ALTURA DE RAIZ
 
 
-
-# Ahora el objetivo será generar un diccionario de palabras candidatas a adivinar.
-# Para ello se proveerá una función que retorna un texto en formato:
-# [
-# [“palabra1”, “definición1”],
-# [“palabra2”, “definición2”],
-# …
-# ]
-# Se les proveerá de una función que devolverá un texto del cual extraerán las palabras
-# con sus definiciones para formar el diccionario. Las palabras seleccionadas deberán tener
-# un mínimo de 5 letras.
-# Una vez generado el diccionario de palabras, se debe mostrar por pantalla el total de
-# palabras que hay por cada letra, y el total que hay en el diccionario.
-
-
-def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa de lista_de_listasas
+POSICION_PALABRA = 0
+MIN_LETRAS = 5
+def generar_palabras_candidatas () :  
 
     """
     El objetivo será generar un diccionario de palabras candidatas a adivinar.
@@ -29,8 +15,7 @@ def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa 
     
     lista_de_listas = datos.obtener_lista_definiciones()
 
-    POSICION_PALABRA = 0
-    MIN_LETRAS = 5
+
 
     indice = 0
 
