@@ -31,7 +31,6 @@ def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa 
 
     POSICION_PALABRA = 0
     MIN_LETRAS = 5
-    CANTIDAD_DE_CANDIDATOS=0
 
     indice = 0
 
@@ -42,7 +41,6 @@ def generar_palabras_candidatas () :  #lista_de_listas, es una lista_de_listasa 
             palabras_candidatas[lista_de_listas[indice][POSICION_PALABRA]] = lista_de_listas[indice][1]
 
         indice+=1
-        CANTIDAD_DE_CANDIDATOS+=1
 
 
     return palabras_candidatas

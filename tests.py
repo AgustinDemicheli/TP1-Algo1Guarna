@@ -4,6 +4,10 @@ from datos.datos_prueba import datos_prueba
 PTO_ACIERTO=10
 PTO_ERROR=-3
 PRIMERA_LETRA = 0
+POSICION_PALABRA = 0
+MIN_LETRAS = 5
+PRIMERA_LETRA = 0
+
 #--------------------------------------------------------------------MODIFICACION DE FUNCIONES ETAPA :1-----------------------------------------------------------------------------
 """
 Para poder cumplir con la consigna tuvimos que realizar modificaciones para adaptar las funciones al modulo doctest,
@@ -64,7 +68,7 @@ def tablero(palabras, palabras_significado):
     return puntos
 
 def letra_palabra():
-    PRIMERA_LETRA = 0
+    
     lista_vieja =["algoritmos"]
     palabra={}
     palabra_significado={}
@@ -131,9 +135,7 @@ def generar_palabras_candidatas () :
     
     lista_de_listas =datos_prueba()
 
-    POSICION_PALABRA = 0
-    MIN_LETRAS = 5
-    CANTIDAD_DE_CANDIDATOS=0
+
 
     indice = 0
 
@@ -144,7 +146,6 @@ def generar_palabras_candidatas () :
             palabras_candidatas[lista_de_listas[indice][POSICION_PALABRA]] = lista_de_listas[indice][1]
 
         indice+=1
-        CANTIDAD_DE_CANDIDATOS+=1
 
 
     return palabras_candidatas

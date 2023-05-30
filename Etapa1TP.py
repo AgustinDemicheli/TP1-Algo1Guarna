@@ -13,7 +13,7 @@ def tablero( ):
     -Agustín Demicheli-
     """
 
-    
+
 
     jugar="si"
     puntos=0
