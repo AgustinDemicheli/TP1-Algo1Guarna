@@ -1,6 +1,4 @@
 import random
-import Etapa2
-import datos
 def eleccion_letras():
     """
         El objetivo de esta funcion es devolver una lista de 10 letras del abecedario que serán
@@ -29,4 +27,3 @@ def eleccion_palabras_candidatas(diccionario, lista):
             lista.remove(palabra[PRIMERA_LETRA])
     return sorted(palabras_candidatas)
     
-eleccion_palabras_candidatas( Etapa2.generar_palabras_candidatas(), eleccion_letras() )

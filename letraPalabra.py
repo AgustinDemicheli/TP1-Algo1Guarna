@@ -1,4 +1,4 @@
-import Etapa2
+import Etapa8
 import Etapa3
 
 def letra_palabra():
@@ -10,12 +10,12 @@ def letra_palabra():
     
     """
     PRIMERA_LETRA = 0
-    lista_vieja = Etapa3.eleccion_palabras_candidatas( Etapa2.generar_palabras_candidatas(), Etapa3.eleccion_letras() )
+    dicc=Etapa8.obtener_lista_definiciones()
+    lista = Etapa3.eleccion_palabras_candidatas(dicc, Etapa3.eleccion_letras())
     palabra={}
     palabra_significado={}
-    dicc=Etapa2.generar_palabras_candidatas()
 
-    for word in lista_vieja:
+    for word in lista:
         palabra[word[PRIMERA_LETRA]]=word
         palabra_significado[word]=dicc[word]
 
