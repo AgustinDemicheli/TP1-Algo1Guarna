@@ -89,8 +89,8 @@ def validar_contraseña(clave,clave_2):
     return validez
 
 def orden():
-    if len(usuarios_ingresados) == 0:
-        messagebox.showerror("","Debe haber al menos 1 jugador para jugar")
+    if len(usuarios_ingresados) <= 1:
+        messagebox.showerror("","Debe haber al menos 2 jugador para jugar")
     else:
         random.shuffle(usuarios_ingresados)
         print(usuarios_ingresados)

@@ -1,4 +1,5 @@
 import random
+import Etapa8
 def eleccion_letras():
     """
         El objetivo de esta funcion es devolver una lista de 10 letras del abecedario que serán
@@ -19,11 +20,12 @@ def eleccion_palabras_candidatas(diccionario, lista):
     
     PRIMERA_LETRA = 0
     palabras_candidatas = []
-    palabras = diccionario.keys()
+    palabras = list(diccionario.keys())
+    random.shuffle(palabras)
    
     for palabra in palabras:
         if palabra[PRIMERA_LETRA] in lista:
             palabras_candidatas.append(palabra)
             lista.remove(palabra[PRIMERA_LETRA])
     return sorted(palabras_candidatas)
-    
+print(eleccion_palabras_candidatas(Etapa8.obtener_lista_definiciones(), eleccion_letras()))
