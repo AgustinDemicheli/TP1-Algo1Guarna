@@ -12,13 +12,11 @@ def letra_palabra():
     PRIMERA_LETRA = 0
     dicc=Etapa8.obtener_lista_definiciones()
     lista = Etapa3.eleccion_palabras_candidatas(dicc, Etapa3.eleccion_letras())
-    palabra={}
     palabra_significado={}
 
     for word in lista:
-        palabra[word[PRIMERA_LETRA]]=word
         palabra_significado[word]=dicc[word]
+        
+    return palabra_significado
 
-    return palabra, palabra_significado
-
-letra_palabra()
+print(letra_palabra())
