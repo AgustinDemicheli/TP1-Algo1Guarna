@@ -39,6 +39,6 @@ def obtener_lista_definiciones():
     arch_2.close()
     dic = crear_diccionario(palabras, definiciones)
     dic = ordenar_diccionario(dic)
-    print(dic)
     crear_archivo(dic)
+    return dic
 obtener_lista_definiciones()

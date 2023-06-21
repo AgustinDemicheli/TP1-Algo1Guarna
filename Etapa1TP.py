@@ -4,7 +4,7 @@ PTO_ACIERTO=10
 PTO_ERROR=-3
 
 
-def tablero( ):
+def tablero(lista_jugadores):
     """
     Dentro de un ciclo,
     tablero recibe dos diccionarios, el primero  contiene inciales-palabra,
@@ -19,6 +19,7 @@ def tablero( ):
     puntos=0
     while jugar=="si":
         (palabras, palabras_significado) = letraPalabra.letra_palabra()
+        
 
         iniciales=[]
         palabra_completa=[]

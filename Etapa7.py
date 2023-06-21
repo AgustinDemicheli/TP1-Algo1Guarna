@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import random
+import Etapa1TP
 
 usuarios_ingresados = []
 
@@ -87,9 +88,13 @@ def validar_contraseña(clave,clave_2):
             messagebox.showerror("","La contraseña debe tener al menos una mayúscula, una minúscula, un número y uno de estos dos caracteres * o !")
     return validez
 
-def tablero():
-    random.shuffle(usuarios_ingresados)
-    print(usuarios_ingresados)
+def orden():
+    if len(usuarios_ingresados) == 0:
+        messagebox.showerror("","Debe haber al menos 1 jugador para jugar")
+    else:
+        random.shuffle(usuarios_ingresados)
+        print(usuarios_ingresados)
+        Etapa1TP.tablero(usuarios_ingresados)
 def ventana_registro():
     rot = Toplevel()
     rot.title("Registro Grupo Cracker")
@@ -120,7 +125,7 @@ def ventana_login():
     Entry(root, show = "*", textvariable = mi_clave).grid(row = 1 , column = 1, padx = (0,15))
     Button(root, text = "Ingresar" ,command=lambda:chequear_login(mi_usuario.get(), mi_clave.get())).grid(row = 2 , column = 0)
     Button(root, text = "Registrarse", command=ventana_registro).grid(row = 2 , column = 1)
-    Button(root, text = "Iniciar Partida", command = tablero).grid(row = 2 , column = 3)
+    Button(root, text = "Iniciar Partida", command = orden).grid(row = 2 , column = 3)
     root.mainloop()
     
 ventana_login()
