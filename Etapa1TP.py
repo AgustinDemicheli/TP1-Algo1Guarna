@@ -1,7 +1,9 @@
 import letraPalabra
+import Etapa10
 
-PTO_ACIERTO=10
-PTO_ERROR=-3
+PTO_ACIERTO = Etapa10.obtener_puntaje_acierto()
+PTO_ERROR= Etapa10.obtener_puntaje_desacierto()
+MAXIMO_PARTIDAS = Etapa10.obtener_maximo_partidas()
 
 
 def tablero(lista_jugadores):
@@ -41,7 +43,7 @@ def tablero(lista_jugadores):
         """
         for llaves,valor in palabras_significado.items():
             iniciales.append(f"[{llaves[0]}]")
-            palabra_completa.append(valor)
+            palabra_completa.append(llaves)
             respuesta.append('[ ]')
             lista_numero_participantes.append('[ ]')
             letras.append(f"[{llaves}]")
@@ -53,13 +55,14 @@ def tablero(lista_jugadores):
         turno(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes)
         jugadas+=1
 
-        juego=input('¿Desea continuar jugando? si/no ')
-        if juego.lower()=='no':
-            jugar="no"
-        elif juego.lower()!='si':
-            jugar=input('¿Desea continuar jugando? si/no ')
-        else:
-            palabras_significado = letraPalabra.letra_palabra()
+        if jugadas < MAXIMO_PARTIDAS:
+            juego=input('¿Desea continuar jugando? si/no ')
+            if juego.lower()=='no':
+                jugar="no"
+            elif juego.lower()!='si':
+                jugar=input('¿Desea continuar jugando? si/no ')
+            else:
+                palabras_significado = letraPalabra.letra_palabra()
 
     print( f"Reporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}")
     jugar='no'
@@ -154,6 +157,6 @@ def listado(historial_turno):
     for intentos in historial_turno:
         lista+=intentos+"\n"
     return lista    
-#listita=['alfredo','jorge']
+listita=['alfredo','jorge']
 #print(tablero(listita))
 

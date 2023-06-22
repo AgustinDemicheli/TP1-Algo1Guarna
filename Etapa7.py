@@ -3,23 +3,30 @@ from tkinter import messagebox
 import random
 import Etapa1TP
 
+MAXIMO_JUGADORES = 4
 usuarios_ingresados = []
 
 def obtener_usuarios_claves():
+    """"
+        El objetivo de esta funcion es obtener los nombres de usuario y su contraseña para ingresar
+        al juego
+    - Nicolas Cardone
+    """
     diccionario = {}
     archivo = open("usuarios.csv", "r")
     for linea in archivo:
         usuario,clave = linea.rstrip("\n").split(",")
         diccionario[usuario] = clave
     archivo.close()
-    print(diccionario)
     return diccionario
 
 def chequear_login(usuario, contraseña):
-    print(usuario)
-    print(contraseña)
+    """"
+        El objetivo de esta funcion es obtener comprobar que el usuario se este logueando correctamente
+    - Nicolas Cardone
+    """
     dic = obtener_usuarios_claves()
-    if len(usuarios_ingresados) >= 4 :
+    if len(usuarios_ingresados) >= MAXIMO_JUGADORES :
         messagebox.showerror("","Maximo de jugadores ingresados para jugar")
     elif usuario in dic and dic[usuario] == contraseña:
         usuarios_ingresados.append(usuario)
@@ -28,9 +35,11 @@ def chequear_login(usuario, contraseña):
         messagebox.showerror("","Algunos de los datos ingresados es Incorrecto")
 
 def chequear_registro(usuario, clave, clave_2):
-    print(usuario)
-    print(clave)
-    print(clave_2)
+    """"
+        El objetivo de esta funcion es que el usuario se este registrando correctamente segun
+        las condiciones dadas
+    - Nicolas Cardone
+    """
     diccionario = obtener_usuarios_claves()
     usuarios = list(diccionario.keys())
     usuario_chequeado = validar_usuario(usuario,usuarios)
@@ -44,6 +53,10 @@ def chequear_registro(usuario, clave, clave_2):
         arch.close()
 
 def validar_usuario(usuario, usuarios):
+    """"
+        El objetivo de esta funcion es comprobar que el usuario sea correcto
+    - Nicolas Cardone
+    """
     validez = True
     if usuario in usuarios:
         validez = False
@@ -59,6 +72,10 @@ def validar_usuario(usuario, usuarios):
     return validez
 
 def validar_contraseña(clave,clave_2):
+    """"
+        El objetivo de esta funcion es comprobar que la contraseña sea correcta
+    - Nicolas Cardone
+    """
     validez = True
     mayus = False
     minus = False
@@ -73,22 +90,31 @@ def validar_contraseña(clave,clave_2):
     elif "á" in clave.lower() or "é" in clave.lower() or "í" in clave.lower() or "ó" in clave.lower() or "ú" in clave.lower():
         validez = False
         messagebox.showerror("","La contraseña no puede tener letras acentuadas")
-    else:
-        for caracter in clave:
-            if caracter.isupper():
-                mayus = True
-            elif caracter.islower():
-                minus = True
-            elif caracter.isnumeric():
-                num = True
-            elif caracter == "*" or caracter == "!":
-                simbolo = True
-        if not mayus or not minus or not num or not simbolo:
-            validez = False
-            messagebox.showerror("","La contraseña debe tener al menos una mayúscula, una minúscula, un número y uno de estos dos caracteres * o !")
+    elif not clave.isalnum():
+        for c in clave:
+            if c != "#" and c != "!" and not c.isalnum():
+                validez = False
+                messagebox.showerror("","La contraseña solo puede tener simbolos como # o !")
+    for caracter in clave:
+        if caracter.isupper():
+            mayus = True
+        elif caracter.islower():
+            minus = True
+        elif caracter.isnumeric():
+            num = True
+        elif caracter == "#" or caracter == "!":
+            simbolo = True
+    if not mayus or not minus or not num or not simbolo:
+        validez = False
+        messagebox.showerror("","La contraseña debe tener al menos una mayúscula, una minúscula, un número y uno de estos dos caracteres # o !")
     return validez
 
 def orden():
+    """"
+        El objetivo de esta funcion es conectar la interfaz grafica con el tablero de la 
+        consola
+    - Nicolas Cardone
+    """
     if len(usuarios_ingresados) <= 1:
         messagebox.showerror("","Debe haber al menos 2 jugador para jugar")
     else:
@@ -96,6 +122,10 @@ def orden():
         print(usuarios_ingresados)
         return Etapa1TP.tablero(usuarios_ingresados)
 def ventana_registro():
+    """"
+        El objetivo de esta funcion es mostrar la ventana del registro
+    - Nicolas Cardone
+    """
     rot = Toplevel()
     rot.title("Registro Grupo Cracker")
     rot.config(width = 300, height = 300, bg = "skyblue")
@@ -112,6 +142,10 @@ def ventana_registro():
     rot.mainloop()
 
 def ventana_login():
+    """"
+        El objetivo de esta funcion es mostrar la ventana principal del logueo
+    - Nicolas Cardone
+    """
     root = Tk()
     root.title("Login Grupo Cracker")
     root.config(width = 500, height = 500, bg = "skyblue")

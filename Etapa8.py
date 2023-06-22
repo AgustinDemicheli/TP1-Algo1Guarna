@@ -1,4 +1,11 @@
+import Etapa10
+LONGITUD_PALABRA_MINIMA = Etapa10.obtener_longitud_palabra_minima()
 def ordenar_diccionario(diccionario):
+    """"
+            El objetivo de esta funcion es dordenar alfabeticamente el diccionario
+        de palabras y definiciones
+    - Nicolas Cardone
+    """
     diccionario_ordenado = {}
     for palabra in sorted(list(diccionario.keys())):
         diccionario_ordenado[palabra] = diccionario[palabra]
@@ -7,6 +14,10 @@ def ordenar_diccionario(diccionario):
 # filtre tildes y las reemplace por letra sin tilde
 
 def crear_archivo(diccionario):
+    """"
+            El objetivo de esta funcion es crear el archivo .csv con las palabras y definiciones
+    - Nicolas Cardone
+    """
     arch = open("diccionario.csv", "w" , encoding='utf-8')
     pa = list(diccionario.keys())
     defi = list(diccionario.values())
@@ -14,6 +25,10 @@ def crear_archivo(diccionario):
         arch.write(pa[k] + "," + defi[k] + "\n")
     arch.close()
 def crear_diccionario(palabras, definiciones):
+    """"
+            El objetivo de esta funcion es crear el diccinario con las palabras y definiciones
+    - Nicolas Cardone
+    """
     diccionario = {}
     palabras_no = []
     for i in range(len(palabras)):
@@ -21,12 +36,17 @@ def crear_diccionario(palabras, definiciones):
         definicion = definiciones[i]
         diccionario[palabra] = definicion
     for clave in diccionario.keys():
-        if len(clave) < 4:
+        if len(clave) < LONGITUD_PALABRA_MINIMA:
             palabras_no.append(clave)
     for n in palabras_no:
         del diccionario[n]
     return diccionario
 def obtener_lista_definiciones():
+    """"
+            El objetivo de esta funcion es leer cada archivo de texto y obtener las palabras
+        y definiciones 
+    - Nicolas Cardone
+    """
     palabras = []
     definiciones = []
     arch_1 = open("palabras.txt", encoding='utf-8')
