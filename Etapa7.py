@@ -94,7 +94,7 @@ def orden():
     else:
         random.shuffle(usuarios_ingresados)
         print(usuarios_ingresados)
-        Etapa1TP.tablero(usuarios_ingresados)
+        return Etapa1TP.tablero(usuarios_ingresados)
 def ventana_registro():
     rot = Toplevel()
     rot.title("Registro Grupo Cracker")
@@ -114,11 +114,12 @@ def ventana_registro():
 def ventana_login():
     root = Tk()
     root.title("Login Grupo Cracker")
-    root.config(width = 500, height = 500, bg = "red")
-    #imagen = Tk.PhotoImage(file="pasapalabra.JPG")
-    #Label(root, image= imagen).grid(row = 0, column = 3)
-    Label(root, text = "Usuario: ",bg = "blue").grid(row = 0, column = 0,padx = 15,pady= 15)
-    Label(root, text = "Clave: ",bg = "blue").grid(row = 1, column = 0,padx = 15,pady= 15)
+    root.config(width = 500, height = 500, bg = "skyblue")
+    imagen = PhotoImage(file="pasapalabra.png")
+    imagen= imagen.subsample(10)#----> realizamos subsample debido al tamaño de la imagen que descargamos
+    Label(root, image= imagen).grid(row = 0, column = 3)
+    Label(root, text = "Usuario: ").grid(row = 0, column = 0,padx = 15,pady= 15)
+    Label(root, text = "Clave: ").grid(row = 1, column = 0,padx = 15,pady= 15)
     mi_usuario = StringVar()
     mi_clave = StringVar()
     Entry(root, textvariable = mi_usuario).grid(row = 0 , column = 1,padx = (0,15))

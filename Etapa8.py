@@ -3,6 +3,9 @@ def ordenar_diccionario(diccionario):
     for palabra in sorted(list(diccionario.keys())):
         diccionario_ordenado[palabra] = diccionario[palabra]
     return diccionario_ordenado
+
+# filtre tildes y las reemplace por letra sin tilde
+
 def crear_archivo(diccionario):
     arch = open("diccionario.csv", "w" , encoding='utf-8')
     pa = list(diccionario.keys())
