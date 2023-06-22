@@ -1,6 +1,5 @@
 import doctest
 from doctest import testmod
-from datos.datos_prueba import datos_prueba
 PTO_ACIERTO=10
 PTO_ERROR=-3
 PRIMERA_LETRA = 0
@@ -16,7 +15,7 @@ sin embargo, las demás funciones no se pueden adaptar ya que tienen un llamado 
 """
 
 
-def tablero(palabras, palabras_significado):
+"""def tablero(palabras, palabras_significado):
 
 
 
@@ -65,23 +64,21 @@ def tablero(palabras, palabras_significado):
 
     print("".join(iniciales))
     print("".join(respuesta))
-    return puntos
+    return puntos"""
 
 def letra_palabra():
     
     lista_vieja =["algoritmos"]
-    palabra={}
     palabra_significado={}
     dicc={"algoritmos":"materia informatica del primer cuatrimestre de ing. informatica"}
 
     for word in lista_vieja:
-        palabra[word[PRIMERA_LETRA]]=word
         palabra_significado[word]=dicc[word]
 
-    return palabra, palabra_significado
+    return  palabra_significado
 
 #--------------------------------------------------------------------MODIFICACION DE FUNCIONES ETAPA :3-----------------------------------------------------------------------------
-def eleccion_palabras_candidatas(diccionario, lista):
+"""def eleccion_palabras_candidatas(diccionario, lista):
     
     palabras_candidatas = []
     palabras = diccionario.keys()
@@ -90,9 +87,8 @@ def eleccion_palabras_candidatas(diccionario, lista):
         if palabra[PRIMERA_LETRA] in lista:
             palabras_candidatas.append(palabra)
             lista.remove(palabra[PRIMERA_LETRA])
-    return sorted(palabras_candidatas)
-#------------------------------------------------------------------MODIFICACION DE FUNCIONES ETAPA :2-------------------------------------------------------------------------------
-def impresiones ( palabras_candidatas ) :
+    return sorted(palabras_candidatas)"""#------------------------------------------------------------------MODIFICACION DE FUNCIONES ETAPA :2-------------------------------------------------------------------------------
+"""def impresiones ( palabras_candidatas ) :
 
 
     lista = list( palabras_candidatas.keys() )
@@ -128,9 +124,9 @@ def impresiones ( palabras_candidatas ) :
             print( 'Hay', palabras_por_letras[elem], 'palabras que empiezan con la letra', elem )
    
 
-    print('La cantidad total de palabras candidatas son:', len(palabras_candidatas))
+    print('La cantidad total de palabras candidatas son:', len(palabras_candidatas))"""
 
-def generar_palabras_candidatas () : 
+"""def generar_palabras_candidatas () : 
     palabras_candidatas = {}
     
     lista_de_listas =datos_prueba()
@@ -148,34 +144,120 @@ def generar_palabras_candidatas () :
         indice+=1
 
 
-    return palabras_candidatas
+    return palabras_candidatas"""
+
+#-----------------------------------------------------------------------ETAPA 7----------------------------------------------------------------------------------------------
+def obtener_usuarios_claves():
+    """"
+        El objetivo de esta funcion es obtener los nombres de usuario y su contraseña para ingresar
+        al juego
+    - Nicolas Cardone
+    """
+    diccionario = {}
+    archivo = open("usuarios.csv", "r")
+    for linea in archivo:
+        usuario,clave = linea.rstrip("\n").split(",")
+        diccionario[usuario] = clave
+    archivo.close()
+    return diccionario
+def validar_usuario(usuario, usuarios):
+    """"
+        El objetivo de esta funcion es comprobar que el usuario sea correcto
+    - Nicolas Cardone
+    """
+    validez = True
+    if usuario in usuarios:
+        validez = False
+    elif len(usuario) < 4 or len(usuario) > 20:
+        validez = False
+    elif not usuario.isalnum():
+        for caracter in usuario:
+            if not caracter.isalnum() and caracter != "-":
+                validez = False
+    return validez
+
+#-----------------------------------------------------------------------ETAPA 9----------------------------------------------------------------------------------------------
+def puntaje(dicc_puntaje_jugadores,lista_participantes):
+    cadena=""
+    for nombre,puntos in dicc_puntaje_jugadores.items():
+        cadena+=f" {lista_participantes.index(nombre)+1}.{nombre} = {puntos} puntos"
+    return cadena
+def listado(historial_turno):
+    """
+    almacena el historial de juego en cada tablero para mostrar al final en formato
+    cadena una lista de errores y aciertos
+    -Agustín Demicheli-
+    """
+    lista=""
+    for intentos in historial_turno:
+        lista+=intentos
+    return lista    
+#-------------------------------------------------------------------------Etapa 10-------------------------------------------------------------------------------------------
+def obtener_longitud_palabra_minima():
+        """"
+                El objetivo de esta funcion es devolver la longitud de palabra minima
+        - Nicolas Cardone
+        """
+        return int(dic["LONGITUD_PALABRA_MINIMA"])
+    
+def obtener_cantidad_letras_rosco():
+        """"
+                El objetivo de esta funcion es devolver la cantidad de letras del rosco
+        - Nicolas Cardone
+        """
+        return int(dic["CANTIDAD_LETRAS_ROSCO"])
+    
+def obtener_maximo_partidas():
+        """"
+                El objetivo de esta funcion es devolver el maximo de partidas a jugar
+        - Nicolas Cardone
+        """
+        return int(dic["MAXIMO_PARTIDAS"])
+    
+def obtener_puntaje_acierto():
+        """"
+                El objetivo de esta funcion es devolver cuantos puntos suma un acierto
+        - Nicolas Cardone
+        """
+        return int(dic["PUNTAJE_ACIERTO"])
+
+def obtener_puntaje_desacierto():
+        """"
+                El objetivo de esta funcion es devolver cuantos puntos resta un desacierto
+        - Nicolas Cardone
+        """
+        return int(dic["PUNTAJE_DESACIERTO"])
+    
+arch = open("configuracion.csv", encoding='utf-8')
+dic = {}
+for linea in arch:
+    nombre, valor = linea.rstrip("\n").split(",")
+    dic[nombre] = valor
 #-------------------------------------------------------------------------PRUEBAS UNITARIAS----------------------------------------------------------------------------------
 def main():
-    """
->>> tablero({'a':'algoritmos'},{'algoritmos':'materia del primer cuatrimestre'})
-[a]
-[ ]
-<BLANKLINE>
-Aciertos: 0
-Errores: 0
-Turno letra a -palabra de 10 letras
-Definición: materia del primer cuatrimestre 
-Ingrese una palabra: [a]
-[a]
-10
->>> letra_palabra()
-({'a': 'algoritmos'}, {'algoritmos': 'materia informatica del primer cuatrimestre de ing. informatica'})
-  
->>> eleccion_palabras_candidatas({'algoritmos':'materia informatica del primer cuatrimestre de ing. informatica','buscar':'iniciar una busqueda'},['a'])
-['algoritmos']
 
->>> impresiones({'algoritmos':'materia informatica del primer cuatrimestre de ing. informatica','buscar':'iniciar una busqueda'})
-Letras y cuantas veces estan:  {'a': 1, 'b': 1}
-Hay 1 palabra que empieza con la letra a
-Hay 1 palabra que empieza con la letra b
-La cantidad total de palabras candidatas son: 2
->>> generar_palabras_candidatas ()
-{'algoritmos': 's. la mejor materia de la fiuba', 'buscar': 'v. acción de búsqueda', 'cauteloso': 'adj. Indicativo que se refiere a alguien que mantiene cuidado y atención frente a situaciones', 'dedal': 's. Elemento utilizado en la costura para protejer el dedo', 'estancia': 's. Propiedad que se encuentra alejada de la ciudad, suele estar rodeada de arboles y tiene una granja', 'limpiar': '1.  tr. Quitar la suciedad o inmundicia de alguien o de algo U. t. c. prnl. U. t. en sent. fig.'}
-     """ 
+    """    
+>>> puntaje({'agus':20,'nico':20},['agus','nico'])
+' 1.agus = 20 puntos 2.nico = 20 puntos'
+>>> listado(['turno letra a- palabra 4 letras acierto','turno letra c- palabra de 6 letras error- palabra correcta: cabras']) 
+'turno letra a- palabra 4 letras aciertoturno letra c- palabra de 6 letras error- palabra correcta: cabras'
+>>> letra_palabra()
+{'algoritmos': 'materia informatica del primer cuatrimestre de ing. informatica'}
+>>> obtener_puntaje_desacierto()
+3
+>>> obtener_puntaje_acierto()
+10
+>>> obtener_maximo_partidas()
+5
+>>> obtener_cantidad_letras_rosco()
+10
+>>> obtener_longitud_palabra_minima()
+4
+>>> obtener_usuarios_claves()
+{'nico7': '#Asd123', 'ademicheli': 'Aaaa0000#'}
+>>> validar_usuario('jaime',['nico7','ademicheli'])
+True
+""" 
+
     print(doctest.testmod())
 main()

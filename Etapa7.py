@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import Etapa1TP
+import Etapa8
 
 MAXIMO_JUGADORES = 4
 usuarios_ingresados = []
@@ -119,8 +120,7 @@ def orden():
         messagebox.showerror("","Debe haber al menos 2 jugador para jugar")
     else:
         random.shuffle(usuarios_ingresados)
-        print(usuarios_ingresados)
-        return Etapa1TP.tablero(usuarios_ingresados)
+        return Etapa1TP.tablero(usuarios_ingresados), Etapa8.obtener_lista_definiciones()
 def ventana_registro():
     """"
         El objetivo de esta funcion es mostrar la ventana del registro

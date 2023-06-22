@@ -8,19 +8,15 @@ MAXIMO_PARTIDAS = Etapa10.obtener_maximo_partidas()
 
 def tablero(lista_jugadores):
     """
-    Dentro de un ciclo,
-    tablero recibe dos diccionarios, el primero  contiene inciales-palabra,
-    el segundo contiene la palabra con su significado, se desglosan en listas, se realiza un llamado a turnos y 
-    al final del tablero si no deseamos continuar jugando nos muestra la puntuacion sino se reinicia el ciclo
-    -Agustín Demicheli-
-    V.TP2 Se altero el flujo de datos para que puedan permanecer los valores tras cada pasada 
-    y sumarse, devuelve el puntaje final junto a la cantidad de pasadas realizadas
+
+    V.TP2 Recibe una lista de jugadores, y en un bucle mantiene el juego hasta el maximo de partidas
+    o hasta que se decida no continuar jugando, devuelve el puntaje final y la cantidad de pasadas que se realizaron
+    -Agustin Demicheli
     """
     dicc_puntaje_jugadores={}
     jugadas=0
     jugar="si"
-    while jugar == "si":
-        #antes   (palabras, palabras_significado) = letraPalabra.letra_palabra()
+    while (jugar == "si") and (jugadas < MAXIMO_PARTIDAS):
 
         palabras_significado = letraPalabra.letra_palabra()
         
@@ -28,53 +24,39 @@ def tablero(lista_jugadores):
         lista_numero_participantes=[]
         palabra_completa=[]
         respuesta=[]
-        letras=[]
         significado=[]
         lista_participantes=[]
-        """
-         for llaves,valor in palabras.items():
-            iniciales.append(f"[{llaves}]")
-            palabra_completa.append(valor)
-            respuesta.append('[ ]')
 
-        for letters,meaning in palabras_significado.items():
-            letras.append(f"[{letters}]")
-            significado.append(meaning)
-        """
         for llaves,valor in palabras_significado.items():
             iniciales.append(f"[{llaves[0]}]")
             palabra_completa.append(llaves)
             respuesta.append('[ ]')
             lista_numero_participantes.append('[ ]')
-            letras.append(f"[{llaves}]")
             significado.append(valor)
 
         for participantes in lista_jugadores:
              lista_participantes.append(participantes)
 
-        turno(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes)
+        jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes)
         jugadas+=1
+        print( f"Puntaje parcial\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}")
+        
+        juego=input('¿Desea continuar jugando? si/no ')
+        if juego.lower()=='no':
+            jugar="no"
+        elif juego.lower()!='si':
+            jugar=input('¿Desea continuar jugando? si/no ')
+        else:
+            palabras_significado = letraPalabra.letra_palabra()
 
-        if jugadas < MAXIMO_PARTIDAS:
-            juego=input('¿Desea continuar jugando? si/no ')
-            if juego.lower()=='no':
-                jugar="no"
-            elif juego.lower()!='si':
-                jugar=input('¿Desea continuar jugando? si/no ')
-            else:
-                palabras_significado = letraPalabra.letra_palabra()
+    return f"Reporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}"
+    
 
-    print( f"Reporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}")
-    jugar='no'
-
-def turno(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes):
+def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes):
     """
-    Muestra el tablero como tal, es la funcion encargada de llevar la
-    informacion del tablero a cabo, recibe un llamado a listado y devuelve los puntos
-    -Agustín Demicheli-
-    -Nadeska Millán-
-    V.TP2: Incluye junto a tablero la lógica que permite jugar de a varios jugadores, recibe listas,
-    y diccionarios e imprime tanto historial de partida como el puntaje parcial
+    Esta funcion recibe las palabras a verificar en el pasapalabra la cantidad de puntos que lleva cada jugador,
+    la lista de participantes y una lista vacia que se rellenara dependiendo del participante que completa la pregunta,
+    muestra los puntajes parciales de cada partida
     """
     k=0
     j=0 
@@ -109,9 +91,9 @@ def turno(iniciales,respuesta,lista_numero_participantes,palabra_completa,signif
                     historial.append(f"Turno letra {iniciales[j][1].upper()} -Jugador {k+1} {lista_participantes[k]}- palabra de {len(palabra_completa[j])} letras - acierto")
                     j+=1
                     if lista_participantes[k] not in dicc_puntaje_jugadores:
-                        dicc_puntaje_jugadores[lista_participantes[k]]=10
+                        dicc_puntaje_jugadores[lista_participantes[k]]=PTO_ACIERTO
                     else:
-                        dicc_puntaje_jugadores[lista_participantes[k]]+=10
+                        dicc_puntaje_jugadores[lista_participantes[k]]+=PTO_ACIERTO
 
 
             else:
@@ -125,21 +107,25 @@ def turno(iniciales,respuesta,lista_numero_participantes,palabra_completa,signif
                     if k==len(lista_participantes):
                         k=0
                     if lista_participantes[k] not in dicc_puntaje_jugadores:
-                        dicc_puntaje_jugadores[lista_participantes[k]]=-3
+                        dicc_puntaje_jugadores[lista_participantes[k]]=-PTO_ERROR
                     else:
-                        dicc_puntaje_jugadores[lista_participantes[k]]-=3
+                        dicc_puntaje_jugadores[lista_participantes[k]]-=PTO_ERROR
         
 
         print("".join(iniciales))
         print("".join(respuesta))
         print(listado(historial))
-        print(f"Puntaje parcial:")
+        print(f"Puntaje de la partida:")
         for nombre in lista_participantes:
             print(f"{nombre}: {dicc_aciertos[nombre]*10-dicc_errores[nombre]*3} ")
         k=len(lista_participantes)
         
 
 def puntaje(dicc_puntaje_jugadores,lista_participantes):
+    """
+    almacena en una cadena la cantidad de usuarios, junto a su puntuacion y el indice 
+    -Agustín Demicheli
+    """
     cadena=""
     for nombre,puntos in dicc_puntaje_jugadores.items():
         cadena+=f" {lista_participantes.index(nombre)+1}.{nombre} = {puntos} puntos"+"\n"
@@ -157,6 +143,4 @@ def listado(historial_turno):
     for intentos in historial_turno:
         lista+=intentos+"\n"
     return lista    
-listita=['alfredo','jorge']
-#print(tablero(listita))
 

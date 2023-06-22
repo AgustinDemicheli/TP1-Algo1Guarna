@@ -38,4 +38,4 @@ dic = {}
 for linea in arch:
     nombre, valor = linea.rstrip("\n").split(",")
     dic[nombre] = valor
-    
+arch.close()

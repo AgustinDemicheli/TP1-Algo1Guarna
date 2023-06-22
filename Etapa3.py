@@ -31,4 +31,4 @@ def eleccion_palabras_candidatas(diccionario, lista):
             lista.remove(palabras[i][PRIMERA_LETRA])
         i += 1
     return sorted(palabras_candidatas)
-print(eleccion_palabras_candidatas(Etapa8.obtener_lista_definiciones(), eleccion_letras()))
+#print(eleccion_palabras_candidatas(Etapa8.obtener_lista_definiciones(), eleccion_letras()))
