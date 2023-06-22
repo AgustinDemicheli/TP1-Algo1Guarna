@@ -159,6 +159,3 @@ def listado(historial_turno):
     for intentos in historial_turno:
         lista+=intentos+"\n"
     return lista    
-
-listita=['alfred','gerard']
-print(tablero(listita))
