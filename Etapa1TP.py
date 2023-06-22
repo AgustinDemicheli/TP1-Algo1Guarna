@@ -57,14 +57,12 @@ def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_complet
     """
     k=0
     j=0 
-    aciertos=0
     dicc_errores={}
     dicc_aciertos={}
     for nombre in lista_participantes:
         dicc_errores[nombre]=0
         dicc_aciertos[nombre]=0
     
-    errores=0
     historial=[]
     while k < len(lista_participantes):
         while  j < len(iniciales):
@@ -84,7 +82,6 @@ def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_complet
                     respuesta[j]='[a]'
                     lista_numero_participantes[j]=f'[{k+1}]'
                     dicc_aciertos[lista_participantes[k]]+=1
-                    aciertos+=1
                     historial.append(f"Turno letra {iniciales[j][1].upper()} -Jugador {k+1} {lista_participantes[k]}- palabra de {len(palabra_completa[j])} letras - acierto")
                     j+=1
                     if lista_participantes[k] not in dicc_puntaje_jugadores:
@@ -96,7 +93,6 @@ def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_complet
             else:
                     respuesta[j]='[e]'
                     lista_numero_participantes[j]=f'[{k+1}]'
-                    errores+=1
                     dicc_errores[lista_participantes[k]]+=1
                     historial.append(f"Turno letra {iniciales[j][1].upper()} -Jugador {k+1} {lista_participantes[k]}- palabra de {len(palabra_completa[j])} letras - error - palabra correcta: {palabra_completa[j]}")
                     j+=1
