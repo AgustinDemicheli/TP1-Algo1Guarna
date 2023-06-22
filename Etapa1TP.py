@@ -14,10 +14,9 @@ def tablero(lista_jugadores):
     -Agustin Demicheli
     """
     dicc_puntaje_jugadores={}
+    seguir_jugando=True
     jugadas=0
-    jugar="si"
-    while (jugar == "si") and (jugadas < MAXIMO_PARTIDAS):
-
+    while (jugadas < MAXIMO_PARTIDAS) and seguir_jugando:
         palabras_significado = letraPalabra.letra_palabra()
         
         iniciales=[]
@@ -39,24 +38,22 @@ def tablero(lista_jugadores):
 
         jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes)
         jugadas+=1
-        print( f"Puntaje parcial\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}")
-        
-        juego=input('¿Desea continuar jugando? si/no ')
-        if juego.lower()=='no':
-            jugar="no"
-        elif juego.lower()!='si':
-            jugar=input('¿Desea continuar jugando? si/no ')
-        else:
-            palabras_significado = letraPalabra.letra_palabra()
 
-    return f"Reporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}"
+        print( f"Puntaje parcial\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}")
+        if not validar_partida():
+            seguir_jugando=False  
+    if jugadas>=MAXIMO_PARTIDAS:
+        print('\nAlcanzó el maximo de partidas, el juego finalizó ')
+    return f"\nReporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}"
     
 
 def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes):
     """
     Esta funcion recibe las palabras a verificar en el pasapalabra la cantidad de puntos que lleva cada jugador,
-    la lista de participantes y una lista vacia que se rellenara dependiendo del participante que completa la pregunta,
+    la lista de participantes y una lista vacia que se rellenara dependiendo del participante que completa la pregunta,y mostrara
+    tanto aciertos y errores de los jugadores que se registren,
     muestra los puntajes parciales de cada partida
+    -Agustín Demicheli
     """
     k=0
     j=0 
@@ -131,6 +128,25 @@ def puntaje(dicc_puntaje_jugadores,lista_participantes):
         cadena+=f" {lista_participantes.index(nombre)+1}.{nombre} = {puntos} puntos"+"\n"
     return cadena
 
+def validar_partida():
+    """
+    Consulta al usuario si decide seguir jugando, 
+    devuelve un dato booleano
+    -Agustín Demicheli
+    """
+    jugar=True
+    respuesta_valida=False
+    while not respuesta_valida:
+        juego=input('¿Desea continuar jugando? si/no ')
+        if juego.lower()=='si':
+            jugar=True
+            respuesta_valida=True
+        elif juego.lower()=='no':
+            jugar=False
+            respuesta_valida=True
+        else:
+            print('Por favor ingrese una respuesta válida')
+    return jugar
 
 
 def listado(historial_turno):
@@ -144,3 +160,5 @@ def listado(historial_turno):
         lista+=intentos+"\n"
     return lista    
 
+listita=['alfred','gerard']
+print(tablero(listita))
