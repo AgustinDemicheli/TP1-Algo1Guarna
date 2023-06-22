@@ -35,7 +35,7 @@ def chequear_login(usuario, contraseña):
     else:
         messagebox.showerror("","Algunos de los datos ingresados es Incorrecto")
 
-def chequear_registro(usuario, clave, clave_2):
+def chequear_registro(usuario, clave, clave_2,rot):
     """"
         El objetivo de esta funcion es que el usuario se este registrando correctamente segun
         las condiciones dadas
@@ -51,6 +51,7 @@ def chequear_registro(usuario, clave, clave_2):
         arch.seek(0,2)
         arch.write("\n"+usuario + "," + clave)
         messagebox.showinfo("","Usuario registrado correctamente")
+        rot.destroy()
         arch.close()
 
 def validar_usuario(usuario, usuarios):
@@ -110,7 +111,7 @@ def validar_contraseña(clave,clave_2):
         messagebox.showerror("","La contraseña debe tener al menos una mayúscula, una minúscula, un número y uno de estos dos caracteres # o !")
     return validez
 
-def orden():
+def orden(root):
     """"
         El objetivo de esta funcion es conectar la interfaz grafica con el tablero de la 
         consola
@@ -120,7 +121,9 @@ def orden():
         messagebox.showerror("","Debe haber al menos 2 jugador para jugar")
     else:
         random.shuffle(usuarios_ingresados)
-        return Etapa1TP.tablero(usuarios_ingresados), Etapa8.obtener_lista_definiciones()
+        root.destroy()  
+        print(Etapa1TP.tablero(usuarios_ingresados))
+        Etapa8.obtener_lista_definiciones()
 def ventana_registro():
     """"
         El objetivo de esta funcion es mostrar la ventana del registro
@@ -138,7 +141,7 @@ def ventana_registro():
     Entry(rot, textvariable = usuario_registro).grid(row = 0 , column = 1,padx = (0,15))
     Entry(rot,show='*' , textvariable = clave_registro).grid(row = 1 , column = 1, padx = (0,15))
     Entry(rot,show='*' ,textvariable = clave_registro_2).grid(row = 2 , column = 1, padx = (0,15))
-    Button(rot, text = "Registro" ,command=lambda:chequear_registro(usuario_registro.get(),clave_registro.get(),clave_registro_2.get())).grid(row = 3 , column = 1)
+    Button(rot, text = "Registro" ,command=lambda:chequear_registro(usuario_registro.get(),clave_registro.get(),clave_registro_2.get(),rot)).grid(row = 3 , column = 1)
     rot.mainloop()
 
 def ventana_login():
@@ -160,7 +163,7 @@ def ventana_login():
     Entry(root, show = "*", textvariable = mi_clave).grid(row = 1 , column = 1, padx = (0,15))
     Button(root, text = "Ingresar" ,command=lambda:chequear_login(mi_usuario.get(), mi_clave.get())).grid(row = 2 , column = 0)
     Button(root, text = "Registrarse", command=ventana_registro).grid(row = 2 , column = 1)
-    Button(root, text = "Iniciar Partida", command = orden).grid(row = 2 , column = 3)
+    Button(root, text="Iniciar Partida", command=lambda: orden(root)).grid(row=2, column=3)
     root.mainloop()
     
 ventana_login()
