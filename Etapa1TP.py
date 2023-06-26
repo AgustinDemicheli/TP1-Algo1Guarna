@@ -24,7 +24,6 @@ def tablero(lista_jugadores):
         palabra_completa=[]
         respuesta=[]
         significado=[]
-        lista_participantes=[]
 
         for llaves,valor in palabras_significado.items():
             iniciales.append(f"[{llaves[0]}]")
@@ -33,18 +32,16 @@ def tablero(lista_jugadores):
             lista_numero_participantes.append('[ ]')
             significado.append(valor)
 
-        for participantes in lista_jugadores:
-             lista_participantes.append(participantes)
 
-        jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes)
+        jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_jugadores)
         jugadas+=1
 
-        print( f"Puntaje parcial\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}")
+        print( f"Puntaje parcial\n{puntaje(dicc_puntaje_jugadores,lista_jugadores)}")
         if not validar_partida():
             seguir_jugando=False  
     if jugadas>=MAXIMO_PARTIDAS:
         print('\nAlcanzó el maximo de partidas, el juego finalizó ')
-    return f"\nReporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_participantes)}"
+    return f"\nReporte final: \nPartidas jugadas:{jugadas}\n{puntaje(dicc_puntaje_jugadores,lista_jugadores)}"
     
 
 def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_completa,significado,dicc_puntaje_jugadores,lista_participantes):
@@ -104,14 +101,13 @@ def jugar_partida(iniciales,respuesta,lista_numero_participantes,palabra_complet
                     else:
                         dicc_puntaje_jugadores[lista_participantes[k]]-=PTO_ERROR
         
-
+        k+=1
         print("".join(iniciales))
         print("".join(respuesta))
         print(listado(historial))
         print(f"Puntaje de la partida:")
         for nombre in lista_participantes:
-            print(f"{nombre}: {dicc_aciertos[nombre]*10-dicc_errores[nombre]*3} ")
-        k=len(lista_participantes)
+            print(f"{nombre}: {(dicc_aciertos[nombre]*PTO_ACIERTO)-(dicc_errores[nombre]*PTO_ERROR)} ")
         
 
 def puntaje(dicc_puntaje_jugadores,lista_participantes):
