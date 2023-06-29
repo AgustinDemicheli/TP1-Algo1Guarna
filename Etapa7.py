@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 import random
-import Etapa1TP
+
+import Etapa1TP 
 import Etapa8
 
 MAXIMO_JUGADORES = 4
@@ -26,7 +27,7 @@ def chequear_login(usuario, contraseña):
         El objetivo de esta funcion es obtener comprobar que el usuario se este logueando correctamente
     - Nicolas Cardone
     """
-    dic = obtener_usuarios_claves()
+    dic = obtener_usuarios_claves() #--> ES EL DICCIONARIO DE LOS USUARIOS YA REGISTRADOS. LEE EL ARCHIVO USUARIOS.CSV
     if len(usuarios_ingresados) >= MAXIMO_JUGADORES :
         messagebox.showerror("","Maximo de jugadores ingresados para jugar")
     elif usuario in dic and dic[usuario] == contraseña:
@@ -41,13 +42,13 @@ def chequear_registro(usuario, clave, clave_2,rot):
         las condiciones dadas
     - Nicolas Cardone
     """
-    diccionario = obtener_usuarios_claves()
+    diccionario = obtener_usuarios_claves()#--> ES EL DICCIONARIO DE LOS USUARIOS YA REGISTRADOS
     usuarios = list(diccionario.keys())
-    usuario_chequeado = validar_usuario(usuario,usuarios)
+    usuario_chequeado = validar_usuario(usuario,usuarios) #--> ENVIO EL USUARIO INGRESADO EN EL FORMUULARIO Y EL "USUARIOS" QUE SON LOS QUE YA ESTAN INGRESADOS
     if usuario_chequeado:
         clave_chequeado = validar_contraseña(clave,clave_2)
     if usuario_chequeado and clave_chequeado:
-        arch = open("usuarios.csv", "r+")
+        arch = open("usuarios.csv", "r+", encoding="utf-8")
         arch.seek(0,2)
         arch.write("\n"+usuario + "," + clave)
         messagebox.showinfo("","Usuario registrado correctamente")
@@ -161,6 +162,7 @@ def ventana_login():
     mi_clave = StringVar()
     Entry(root, textvariable = mi_usuario).grid(row = 0 , column = 1,padx = (0,15))
     Entry(root, show = "*", textvariable = mi_clave).grid(row = 1 , column = 1, padx = (0,15))
+
     Button(root, text = "Ingresar" ,command=lambda:chequear_login(mi_usuario.get(), mi_clave.get())).grid(row = 2 , column = 0)
     Button(root, text = "Registrarse", command=ventana_registro).grid(row = 2 , column = 1)
     Button(root, text="Iniciar Partida", command=lambda: orden(root)).grid(row=2, column=3)

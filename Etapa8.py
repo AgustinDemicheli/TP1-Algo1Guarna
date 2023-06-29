@@ -2,7 +2,7 @@ import Etapa10
 LONGITUD_PALABRA_MINIMA = Etapa10.obtener_longitud_palabra_minima()
 def ordenar_diccionario(diccionario):
     """"
-            El objetivo de esta funcion es dordenar alfabeticamente el diccionario
+            El objetivo de esta funcion es ordenar alfabeticamente el diccionario
         de palabras y definiciones
     - Nicolas Cardone
     """
@@ -15,18 +15,19 @@ def ordenar_diccionario(diccionario):
 
 def crear_archivo(diccionario):
     """"
-            El objetivo de esta funcion es crear el archivo .csv con las palabras y definiciones
+            El objetivo de esta funcion es crear el archivo diccionario.csv con las palabras y definiciones
     - Nicolas Cardone
     """
     arch = open("diccionario.csv", "w" , encoding='utf-8')
     pa = list(diccionario.keys())
     defi = list(diccionario.values())
     for k in range(len(pa)):
-        arch.write(pa[k] + "," + defi[k] + "\n")
+        arch.write(pa[k] + ", '" + defi[k] + "'\n")
     arch.close()
 def crear_diccionario(palabras, definiciones):
     """"
-            El objetivo de esta funcion es crear el diccinario con las palabras y definiciones
+            Recibe una lista con las palabras y otra lista con sus respectivas definiciones.
+            El objetivo de esta funcion es crear el diccinario con las palabras y sus definiciones correspondientes y devolverlo.
     - Nicolas Cardone
     """
     diccionario = {}

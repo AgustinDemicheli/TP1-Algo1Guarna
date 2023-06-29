@@ -13,7 +13,7 @@ def eleccion_letras():
                     'x', 'y', 'z']
     return sorted(random.sample(abecedario,CANTIDAD_LETRAS_ROSCO))
     
-def eleccion_palabras_candidatas(diccionario, lista):
+def eleccion_palabras_candidatas(diccionario, lista_de_letras):
     """"
         El objetivo de esta funcion es elegir 10 palabras del diccionario formado en la etapa 8
     las cuales deben comenzar con las letras de la anterior funcion
@@ -25,10 +25,10 @@ def eleccion_palabras_candidatas(diccionario, lista):
     palabras = list(diccionario.keys())
     random.shuffle(palabras)
 
-    while i < len(palabras) or len(lista) > 0 :
-        if palabras[i][PRIMERA_LETRA] in lista:
+    while i < len(palabras) or len(lista_de_letras) > 0 :
+        if palabras[i][PRIMERA_LETRA] in lista_de_letras:
             palabras_candidatas.append(palabras[i])
-            lista.remove(palabras[i][PRIMERA_LETRA])
+            lista_de_letras.remove(palabras[i][PRIMERA_LETRA])
         i += 1
     return sorted(palabras_candidatas)
 #print(eleccion_palabras_candidatas(Etapa8.obtener_lista_definiciones(), eleccion_letras()))
